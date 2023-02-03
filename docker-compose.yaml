@@ -1,0 +1,51 @@
+# docker-compose.yml
+version: "3.8"
+services:
+
+  nginx:
+    container_name: nginx
+    build: ./docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - 1080:80
+    volumes:
+      - ./src:/var/www/html
+
+  php:
+    container_name: php
+    build: ./docker/php
+    links:
+      - mysql
+    ports:
+      - 1090:9000
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+
+  mysql:
+    image: mysql:8.0.27
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: ESP32
+      MYSQL_USER: ESP32_USER
+      MYSQL_PASSWORD: ESP32_PASSWORD
+    ports:
+      - 1036:3306
+    volumes:
+      - ./docker/database/mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 1085:80
