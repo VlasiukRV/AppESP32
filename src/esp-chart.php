@@ -20,6 +20,7 @@ $sql = "SELECT id, value1, value2, value3, reading_time FROM SensorData order by
 
 $result = $conn->query($sql);
 
+$sensor_data[] = array();
 while ($data = $result->fetch_assoc()){
     $sensor_data[] = $data;
 }
