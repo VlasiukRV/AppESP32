@@ -39,7 +39,7 @@ $result->free();
 
 <h2>ESP Weather Station</h2>
 <br>
-<div><a href="/index.php">Dashboard</a></div>
+<div><p><a href="index.php" class="btn btn-primary">Back</a></p></div>
 
 <div class="row align-items-start">
     <div class="col">
