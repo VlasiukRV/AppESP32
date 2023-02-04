@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($location_err) && empty($user_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO sensors (name, location, user) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO Sensors (name, location, user) VALUES (?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters

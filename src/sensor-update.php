@@ -40,7 +40,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($location_err) && empty($user_err)){
         // Prepare an update statement
-        $sql = "UPDATE sensors SET name=?, location=?, user=? WHERE id=?";
+        $sql = "UPDATE Sensors SET name=?, location=?, user=? WHERE id=?";
 
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -75,7 +75,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $id =  trim($_GET["id"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM sensors WHERE id = ?";
+        $sql = "SELECT * FROM Sensors WHERE id = ?";
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("i", $param_id);
