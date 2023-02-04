@@ -1,27 +1,13 @@
 <?php
 
-$servername = "mysql_esp32";
-
-// REPLACE with your Database name
-$dbname = "ESP32";
-// REPLACE with Database user
-$username = "ESP32_USER";
-// REPLACE with Database user password
-$password = "ESP32_PASSWORD";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once "header.php";
 
 $sql = "SELECT id, value1, value2, value3, reading_time FROM SensorData order by reading_time desc limit 100";
 
-$result = $conn->query($sql);
+$result = $mysqli->query($sql);
 
 $sensor_data[] = array();
-while ($data = $result->fetch_assoc()){
+while ($data = $result->fetch_assoc()) {
     $sensor_data[] = $data;
 }
 
@@ -48,32 +34,20 @@ echo $value3;
 echo $reading_time;*/
 
 $result->free();
-$conn->close();
+
 ?>
 
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<style>
-    body {
-        min-width: 310px;
-        max-width: 1280px;
-        height: 500px;
-        margin: 0 auto;
-    }
-    h2 {
-        font-family: Arial;
-        font-size: 2.5rem;
-        text-align: center;
-    }
-</style>
-<body>
 <h2>ESP Weather Station</h2>
 <br>
-<div> <a href="/esp-data.php">ESP DATA</a> </div>
-<div id="chart-temperature" class="container"></div>
-<div id="chart-humidity" class="container"></div>
+<div><a href="/index.php">Dashboard</a></div>
+
+<div class="row align-items-start">
+    <div class="col">
+        <div id="chart-temperature" class="container"></div>
+    </div>
+    <div class="col">
+        <div id="chart-humidity" class="container"></div>
+    </div>
 <div id="chart-pressure" class="container"></div>
 <script>
 
@@ -83,39 +57,41 @@ $conn->close();
     var reading_time = <?php echo $reading_time; ?>;
 
     var chartT = new Highcharts.Chart({
-        chart:{ renderTo : 'chart-temperature' },
-        title: { text: 'Temperature C' },
+        chart: {renderTo: 'chart-temperature'},
+        title: {text: 'Temperature C'},
         series: [{
             showInLegend: false,
             data: value1
         }],
         plotOptions: {
-            line: { animation: false,
-                dataLabels: { enabled: true }
+            line: {
+                animation: false,
+                dataLabels: {enabled: true}
             },
-            series: { color: '#059e8a' }
+            series: {color: '#059e8a'}
         },
         xAxis: {
             type: 'datetime',
             categories: reading_time
         },
         yAxis: {
-            title: { text: 'Temperature (Celsius)' }
+            title: {text: 'Temperature (Celsius)'}
             //title: { text: 'Temperature (Fahrenheit)' }
         },
-        credits: { enabled: false }
+        credits: {enabled: false}
     });
 
     var chartH = new Highcharts.Chart({
-        chart:{ renderTo:'chart-humidity' },
-        title: { text: 'Temperature F' },
+        chart: {renderTo: 'chart-humidity'},
+        title: {text: 'Temperature F'},
         series: [{
             showInLegend: false,
             data: value2
         }],
         plotOptions: {
-            line: { animation: false,
-                dataLabels: { enabled: true }
+            line: {
+                animation: false,
+                dataLabels: {enabled: true}
             }
         },
         xAxis: {
@@ -124,35 +100,38 @@ $conn->close();
             categories: reading_time
         },
         yAxis: {
-            title: { text: 'Temperature F' }
+            title: {text: 'Temperature F'}
         },
-        credits: { enabled: false }
+        credits: {enabled: false}
     });
 
 
     var chartP = new Highcharts.Chart({
-        chart:{ renderTo:'chart-pressure' },
-        title: { text: 'Humidity' },
+        chart: {renderTo: 'chart-pressure'},
+        title: {text: 'Humidity'},
         series: [{
             showInLegend: false,
             data: value3
         }],
         plotOptions: {
-            line: { animation: false,
-                dataLabels: { enabled: true }
+            line: {
+                animation: false,
+                dataLabels: {enabled: true}
             },
-            series: { color: '#18009c' }
+            series: {color: '#18009c'}
         },
         xAxis: {
             type: 'datetime',
             categories: reading_time
         },
         yAxis: {
-            title: { text: 'Humidity (%)' }
+            title: {text: 'Humidity (%)'}
         },
-        credits: { enabled: false }
+        credits: {enabled: false}
     });
 
 </script>
-</body>
-</html>
+
+<?php
+require_once "footer.php";
+?>
