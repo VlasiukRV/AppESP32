@@ -17,16 +17,16 @@ services:
     container_name: php
     build: ./docker/php
     links:
-      - mysql
+      - mysql_esp32
     ports:
       - 1090:9000
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
 
-  mysql:
+  mysql_esp32:
     image: mysql:8.0.27
-    container_name: mysql
+    container_name: mysql_esp32
     environment:
       MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: ESP32
@@ -41,9 +41,9 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: pma
     links:
-      - mysql
+      - mysql_esp32
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mysql_esp32
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     restart: always

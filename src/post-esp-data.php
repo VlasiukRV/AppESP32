@@ -1,6 +1,6 @@
 <?php
 
-$servername = "mysql";
+$servername = "mysql_esp32";
 
 // REPLACE with your Database name
 $dbname = "ESP32";

@@ -6,7 +6,7 @@
 //    char sensorLocation [10] = "Arthur";
 
 // The MySQL service named in the docker-compose.yml.
-$host = 'mysql';
+$host = 'mysql_esp32';
 
 // Database use name
 $user = 'ESP32_USER';
