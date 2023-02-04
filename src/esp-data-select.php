@@ -19,8 +19,8 @@
                 echo "<th>Location</th>";
                 echo "<th>Temperature C</th>";
                 echo "<th>Temperature F</th>";
-                echo "<th>Value3</th>";
                 echo "<th>Humidity</th>";
+                echo "<th>Timestamp</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
