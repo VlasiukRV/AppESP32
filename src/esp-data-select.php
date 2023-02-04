@@ -17,10 +17,10 @@
                 echo "<th>#</th>";
                 echo "<th>Sensor</th>";
                 echo "<th>Location</th>";
-                echo "<th>Value1</th>";
-                echo "<th>Value2</th>";
+                echo "<th>Temperature C</th>";
+                echo "<th>Temperature F</th>";
                 echo "<th>Value3</th>";
-                echo "<th>Timestamp</th>";
+                echo "<th>Humidity</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
