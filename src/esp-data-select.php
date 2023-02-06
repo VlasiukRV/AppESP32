@@ -28,8 +28,8 @@ $html_tableData = getHtmlTable($mysqli, $sql_query, $column_array, $html_table_s
 <div class="row">
     <div class="col-md-12">
         <div class="mt-5 mb-3 clearfix">
-            <!--<h2 class="pull-left">ESP Sensor Data</h2>-->
-            <a href="esp-chart.php" class="btn  pull-right"><i class="fa fa-eye"></i> View Chart</a>
+            <h2 class="pull-left">ESP Sensor Data</h2>
+            <!--<a href="esp-chart.php" class="btn  pull-right"><i class="fa fa-eye"></i> View Chart</a>-->
         </div>
 
         <?php echo $html_tableData; ?>
