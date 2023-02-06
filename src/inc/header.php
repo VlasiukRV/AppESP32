@@ -4,6 +4,11 @@
 //    char apiKeyValue [13] = "tPmAT5Ab3j7F9";
 //    char sensorName [10] = "DHT11";
 //    char sensorLocation [10] = "Arthur";
+
+
+// Include config file
+require_once "config.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +38,6 @@
     </script>
 </head>
 <body>
-<?php
-// Include config file
-require_once "config.php";
-?>
 
 <div class="container">
     <div class="container-fluid">

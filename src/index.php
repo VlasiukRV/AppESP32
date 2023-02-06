@@ -1,9 +1,17 @@
 <?php
 
-require_once "header.php";
+require_once "inc/header.php";
 
-require_once "sensor-select.php";
-require_once "esp-data-select.php";
+?>
+<div class="container">
+    <div class="row">
+        <div><p><a href="sensor-select.php" class="btn btn-primary">Sensors</a></p></div>
+        <div><p><a href="esp-data-select.php" class="btn btn-primary">Data</a></p></div>
+    </div>
+</div>
 
-require_once "footer.php";
+<?php
+require_once "esp-chart.php";
+
+require_once "inc/footer.php";
 ?>

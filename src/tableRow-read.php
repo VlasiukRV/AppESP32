@@ -1,11 +1,16 @@
 <?php
+// Include config file
+require_once "config.php";
+
+$html ='';
 // Check existence of id parameter before processing further
-if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
-    // Include config file
-    require_once "config.php";
+if( (isset($_GET["id"]) && !empty($_GET["id"])) &&
+    (isset($_GET["tableName"]) && !empty($_GET["tableName"]))
+){
 
     // Prepare a select statement
-    $sql = "SELECT * FROM Sensors WHERE id = ?";
+    $tableName = trim($_GET["tableName"]);
+    $sql = "SELECT * FROM " . $tableName . " WHERE id = ?";
 
     if($stmt = $mysqli->prepare($sql)){
         // Bind variables to the prepared statement as parameters
@@ -23,10 +28,17 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 contains only one row, we don't need to use while loop */
                 $row = $result->fetch_array(MYSQLI_ASSOC);
 
-                // Retrieve individual field value
-                $name = $row["name"];
-                $location = $row["location"];
-                $user = $row["user"];
+                foreach ($data_table[$_GET["tableName"]] as $columns) {
+                    foreach ($columns as $column) {
+                        $html = $html . sprintf('
+                            <div class="form-group">
+                                <label>%1$s</label>
+                                <p><b>%2$s</b></p>
+                            </div>
+                            ', $column['alias'], $row[$column['name']]);
+                    }
+                }
+
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -69,18 +81,9 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         <div class="row">
             <div class="col-md-12">
                 <h1 class="mt-5 mb-3">View Record</h1>
-                <div class="form-group">
-                    <label>Name</label>
-                    <p><b><?php echo $row["name"]; ?></b></p>
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <p><b><?php echo $row["location"]; ?></b></p>
-                </div>
-                <div class="form-group">
-                    <label>User</label>
-                    <p><b><?php echo $row["user"]; ?></b></p>
-                </div>
+
+                <?php echo $html; ?>
+
                 <p><a href="index.php" class="btn btn-primary">Back</a></p>
             </div>
         </div>
