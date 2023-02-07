@@ -29,7 +29,7 @@ $reading_time = json_encode(array_reverse($readings_time), JSON_NUMERIC_CHECK);
 
 $current_time =  $readings_time[1];
 $current_temperature =  $sensor_data[1]['value2'];
-$current_humidity =  $sensor_data[1]['value2'];
+$current_humidity =  $sensor_data[1]['value3'];
 
 $result->free();
 
