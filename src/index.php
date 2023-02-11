@@ -13,6 +13,18 @@ require_once "inc/header.php";
 </div>
 
 <?php
+
+?>
+<div class="row align-items-center">
+    <div class="col">
+        <h2>ESP Weather Station</h2>
+    </div>
+</div>
+
+<?php
+
+require_once "esp-chart-current.php";
+
 require_once "esp-chart.php";
 
 require_once "esp-chart-byhour.php";
