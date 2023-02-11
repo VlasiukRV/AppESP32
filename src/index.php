@@ -6,8 +6,8 @@ require_once "inc/header.php";
 <div class="row">
     <div class="col">
     <div class="btn-group" role="group">
-        <a href="sensor-select.php" class="btn btn-primary">Sensors</a>
-        <a href="esp-data-select.php" class="btn btn-primary">Data</a>
+        <a href="tableRow-select.php?tableName=Sensors" class="btn btn-primary">Sensors</a>
+        <a href="tableRow-select.php?tableName=SensorData" class="btn btn-primary">SensorData</a>
     </div>
     </div>
 </div>

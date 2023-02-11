@@ -8,10 +8,11 @@ function getHtmlTable($mysqli, $sql_query, $column_array, $html_table_setting)
         $html_table = '<div class="alert alert-danger"><em>No records were found.</em></div>';
         if ($result->num_rows > 0) {
             $html_tableHead_tr_layout = '';
-            foreach ($column_array as [$column_name, $column_description]) {
-                // logic here with $column_name and $column_description
-                $html_tableHead_tr_layout = $html_tableHead_tr_layout
-                    . sprintf('<th>%1$s</th>', $column_description);
+            foreach ($column_array as $columns) {
+                foreach ($columns as $column) {
+                    $html_tableHead_tr_layout = $html_tableHead_tr_layout
+                        . sprintf('<th>%1$s</th>', $column['alias']);
+                }
             }
 
             if ($html_table_setting['editRow']) {
@@ -22,11 +23,14 @@ function getHtmlTable($mysqli, $sql_query, $column_array, $html_table_setting)
             while ($row = $result->fetch_array()) {
 
                 $html_tableData_tr_layout = $html_tableData_tr_layout . '<tr>';
-                foreach ($column_array as [$column_name, $column_description]) {
-                    // logic here with $column_name and $column_description
-                    $html_tableData_tr_layout = $html_tableData_tr_layout
-                        . sprintf('<td>%1$s</td>', $row[$column_name]);
+                foreach ($column_array as $columns) {
+                    foreach ($columns as $column) {
+                        // logic here with $column_name and $column_description
+                        $html_tableData_tr_layout = $html_tableData_tr_layout
+                            . sprintf('<td>%1$s</td>', $row[$column['name']]);
+                    }
                 }
+
                 if ($html_table_setting['editRow']) {
                     $html_tableData_tr_layout = $html_tableData_tr_layout
                         . sprintf('
