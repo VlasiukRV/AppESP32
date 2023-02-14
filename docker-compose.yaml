@@ -13,8 +13,6 @@ services:
       - php
 
   php:
-    env_file:
-      - .env
     container_name: php
     build: ./docker/php
     links:
@@ -36,8 +34,6 @@ services:
     working_dir: /var/www/html
 
   mysql_esp32:
-    env_file:
-      - .env
     image: mysql:8.0.27
     container_name: mysql_esp32
     environment:
@@ -64,8 +60,6 @@ services:
       - 1085:80
 
   mosquitto:
-    env_file:
-      - .env
     image: eclipse-mosquitto:2
     container_name: mosquitto
     volumes:
