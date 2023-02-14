@@ -7,3 +7,4 @@ docker/mosquitto/data/mosquitto.db
 
 /docker/database/mysql/
 /AppESP32.iml
+.env
