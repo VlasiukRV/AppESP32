@@ -17,6 +17,16 @@ services:
     build: ./docker/php
     links:
       - mysql_esp32
+      - mosquitto
+    environment:
+      MOSQUITTO_BROKER_URL: ${MOSQUITTO_BROKER_URL}
+      MOSQUITTO_BROKER_WEBSOCKET_PORT: ${MOSQUITTO_BROKER_WEBSOCKET_PORT}
+      MOSQUITTO_BROKER_USER: ${MOSQUITTO_BROKER_USER}
+      MOSQUITTO_BROKER_PASSWORD: ${MOSQUITTO_BROKER_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 9000:9000
     volumes:
@@ -27,10 +37,10 @@ services:
     image: mysql:8.0.27
     container_name: mysql_esp32
     environment:
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: ESP32
-      MYSQL_USER: ESP32_USER
-      MYSQL_PASSWORD: ESP32_PASSWORD
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 1036:3306
     volumes:
@@ -51,10 +61,11 @@ services:
 
   mosquitto:
     image: eclipse-mosquitto:2
+    container_name: mosquitto
     volumes:
       - ./docker/mosquitto/config/:/mosquitto/config/
       - ./docker/mosquitto/log/:/mosquitto/log/
       - ./docker/mosquitto/data:/mosquitto/data/
     ports:
-      - 1883:1883
-      - 9001:9001
+      - ${MOSQUITTO_BROKER_PORT}:1883
+      - ${MOSQUITTO_BROKER_WEBSOCKET_PORT}:9001

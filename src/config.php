@@ -1,13 +1,18 @@
 <?php
+
+$MOSQUITTO_BROKER_URL               = getenv('MOSQUITTO_BROKER_URL');
+$MOSQUITTO_BROKER_WEBSOCKET_PORT    = getenv('MOSQUITTO_BROKER_WEBSOCKET_PORT');
+$MOSQUITTO_BROKER_USER              = getenv('MOSQUITTO_BROKER_USER');
+$MOSQUITTO_BROKER_PASSWORD          = getenv('MOSQUITTO_BROKER_PASSWORD');
+
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
 define('DB_SERVER', 'mysql_esp32');
-define('DB_USERNAME', 'ESP32_USER');
-define('DB_PASSWORD', 'ESP32_PASSWORD');
-define('DB_NAME', 'ESP32');
-
+$MYSQL_DATABASE      = getenv('MYSQL_DATABASE');
+$MYSQL_USER          = getenv('MYSQL_USER');
+$MYSQL_PASSWORD      = getenv('MYSQL_PASSWORD');
 /* Attempt to connect to MySQL database */
-$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$mysqli = new mysqli(DB_SERVER, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DATABASE);
 
 // Check connection
 if ($mysqli === false) {

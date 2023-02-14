@@ -1,4 +1,9 @@
 
 /.idea/
+
+docker/mosquitto/config/password.txt
+docker/mosquitto/log/mosquitto.log
+docker/mosquitto/data/mosquitto.db
+
 /docker/database/mysql/
 /AppESP32.iml
