@@ -2,6 +2,7 @@
 /.idea/
 
 docker/mosquitto/config/password.txt
+docker/mosquitto/config/mosquitto.conf
 docker/mosquitto/log/mosquitto.log
 docker/mosquitto/data/mosquitto.db
 
