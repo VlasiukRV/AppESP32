@@ -4,30 +4,42 @@ require_once "config.php";
 require_once "inc/header.php";
 
 ?>
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="index.php">Back</a>
+    </li>
+</ul>
 
- <div class="bg-light px-3 mb-3">
-    <h2> Temperature </h2>
-    <div id="container_temperature"> /Temperature/ </div>
-</div>
-<div class="bg-light px-3 mb-3">
-    <h2> Humidity </h2>
-    <div id="container_humidity"> /Humidity/ </div>
-</div>
-<div class="bg-light px-3 mb-3 alert-primary">
-    <h2> Motion </h2>
-    <div id="container_motion"> /Motion/ </div>
-</div>
+<div class="row">
 
-<div class="bg-light px-3 mb-3">
-    <h2> Display </h2>
-    <div class="input-group mb-3">
-        <textarea id='message' type="text" class="form-control" placeholder="Message on display" aria-label="Message on display" aria-describedby="button-addon2"></textarea>
-        <button class="btn btn-outline-secondary" type="button" id="send_button" onclick="sendMessage()">Send Message on display</button>
+    <div class="bg-light px-3 mb-3">
+        <h2> Temperature </h2>
+        <div id="container_temperature"> /Temperature/</div>
     </div>
-</div>
-<div class="bg-light px-3 mb-3">
-    <h2> GPIO </h2>
-    <div id="cblist"></div>
+    <div class="bg-light px-3 mb-3">
+        <h2> Humidity </h2>
+        <div id="container_humidity"> /Humidity/</div>
+    </div>
+    <div class="bg-light px-3 mb-3 alert-primary">
+        <h2> Motion </h2>
+        <div id="container_motion"> /Motion/</div>
+    </div>
+
+    <div class="bg-light px-3 mb-3">
+        <h2> Display </h2>
+        <div class="input-group mb-3">
+            <textarea id='message' type="text" class="form-control" placeholder="Message on display"
+                      aria-label="Message on display" aria-describedby="button-addon2"></textarea>
+            <button class="btn btn-outline-secondary" type="button" id="send_button" onclick="sendMessage()">Send
+                Message on display
+            </button>
+        </div>
+    </div>
+    <div class="bg-light px-3 mb-3">
+        <h2> GPIO </h2>
+        <div id="cblist"></div>
+    </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
@@ -44,7 +56,7 @@ require_once "inc/header.php";
     client.connect({
         userName: '<?php echo $MOSQUITTO_BROKER_USER ?>',
         password: '<?php echo $MOSQUITTO_BROKER_PASSWORD ?>',
-        onSuccess: function() {
+        onSuccess: function () {
             console.log("onConnect");
             client.subscribe("room/temperature");
             client.subscribe("room/humidity");
@@ -81,7 +93,7 @@ require_once "inc/header.php";
         client.send(message);
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         addCheckbox({
             name: 'gpio25',

@@ -3,15 +3,18 @@
 require_once "inc/header.php";
 
 ?>
-<div class="row">
-    <div class="col">
-    <div class="btn-group" role="group">
-        <a href="tableRow-select.php?tableName=Sensors" class="btn btn-primary">Sensors</a>
-        <a href="tableRow-select.php?tableName=SensorData" class="btn btn-primary">SensorData</a>
-        <a href="mqtt.php" class="btn btn-primary">get data using MQTT</a>
-    </div>
-    </div>
-</div>
+
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="tableRow-select.php?tableName=Sensors">Sensors</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="tableRow-select.php?tableName=SensorData">SensorData</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="mqtt.php">get data using MQTT</a>
+    </li>
+</ul>
 
 <?php
 

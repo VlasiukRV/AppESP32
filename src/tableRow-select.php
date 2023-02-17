@@ -24,13 +24,11 @@ if (isset($_GET["tableName"]) && !empty($_GET["tableName"])
 
 ?>
 
-    <div class="row">
-        <div class="col">
-            <div class="btn-group" role="group">
-                <a href="index.php" class="btn btn-primary">Back</a>
-            </div>
-        </div>
-    </div>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.php">Back</a>
+        </li>
+    </ul>
 
     <div class="row">
 
