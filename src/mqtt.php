@@ -5,27 +5,29 @@ require_once "inc/header.php";
 
 ?>
 
- <div>
+ <div class="bg-light px-3 mb-3">
     <h2> Temperature </h2>
-    <div id="container_temperature">Temperature</div>
+    <div id="container_temperature"> /Temperature/ </div>
 </div>
-<div>
+<div class="bg-light px-3 mb-3">
     <h2> Humidity </h2>
-    <div id="container_humidity">Humidity</div>
+    <div id="container_humidity"> /Humidity/ </div>
+</div>
+<div class="bg-light px-3 mb-3 alert-primary">
+    <h2> Motion </h2>
+    <div id="container_motion"> /Motion/ </div>
 </div>
 
-<div>
-
-
+<div class="bg-light px-3 mb-3">
     <h2> Display </h2>
     <div class="input-group mb-3">
         <textarea id='message' type="text" class="form-control" placeholder="Message on display" aria-label="Message on display" aria-describedby="button-addon2"></textarea>
         <button class="btn btn-outline-secondary" type="button" id="send_button" onclick="sendMessage()">Send Message on display</button>
     </div>
-
+</div>
+<div class="bg-light px-3 mb-3">
     <h2> GPIO </h2>
     <div id="cblist"></div>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
@@ -34,6 +36,7 @@ require_once "inc/header.php";
 
     const divTemperature = document.getElementById('container_temperature');
     const divHumidity = document.getElementById('container_humidity');
+    const divMotion = document.getElementById('container_motion');
 
     // Create a client instance
     var client = new Paho.MQTT.Client('<?php echo $MOSQUITTO_BROKER_URL ?>', <?php echo $MOSQUITTO_BROKER_WEBSOCKET_PORT ?>, "clientId");
@@ -45,6 +48,7 @@ require_once "inc/header.php";
             console.log("onConnect");
             client.subscribe("room/temperature");
             client.subscribe("room/humidity");
+            client.subscribe("room/motion");
         }
     });
     // set callback handlers
@@ -59,22 +63,16 @@ require_once "inc/header.php";
             divTemperature.textContent = message.payloadString + ' F';
         } else if (message.destinationName === 'room/humidity') {
             divHumidity.textContent = message.payloadString + ' %';
+        } else if (message.destinationName === 'room/motion') {
+            divMotion.textContent = message.payloadString;
+            if (message.payloadString === "detected") {
+                divMotion.classList.add("text-bg-danger");
+            } else {
+                divMotion.classList.remove("text-bg-danger");
+            }
         }
 
     };
-
-    $(document).ready(function(){
-        // On-click button function
-        $("send_button").click(function(){
-            // Printing the input value in that specific div
-
-            console.log("Send message to mgtt brocker")
-            message = new Paho.MQTT.Message($('#message').val());
-            message.destinationName = "room/display";
-            client.send(message);
-
-        });
-    });
 
     function sendMessage() {
         console.log("Send message to mgtt brocker");
@@ -96,6 +94,14 @@ require_once "inc/header.php";
         addCheckbox({
             name: 'gpio27',
             pin_num: '27'
+        });
+        addCheckbox({
+            name: 'gpio32',
+            pin_num: '32'
+        });
+        addCheckbox({
+            name: 'gpio33',
+            pin_num: '33'
         });
 
     });

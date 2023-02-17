@@ -8,6 +8,7 @@ require_once "inc/header.php";
     <div class="btn-group" role="group">
         <a href="tableRow-select.php?tableName=Sensors" class="btn btn-primary">Sensors</a>
         <a href="tableRow-select.php?tableName=SensorData" class="btn btn-primary">SensorData</a>
+        <a href="mqtt.php" class="btn btn-primary">get data using MQTT</a>
     </div>
     </div>
 </div>
